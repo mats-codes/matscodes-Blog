@@ -3,6 +3,7 @@ title: "Third Post"
 date: 2019-10-13 18:00:00
 author: "Mattes Wieben"
 path: "/third-post"
+image: "../../images/javascript.jpg"
 ---
 
 Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue! Today we're going to learn about Vue!
