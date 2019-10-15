@@ -2,7 +2,7 @@
 title: "Third Post"
 date: 2019-10-13 18:00:00
 author: "Mattes Wieben"
-path: "/third-post"
+pat: "/third-post"
 image: "../../images/javascript.jpg"
 tags:
   - code
