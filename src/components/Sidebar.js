@@ -1,10 +1,93 @@
 import React from "react"
-import { Card, CardTitle, CardBody, Form, FormGroup, Input } from "reactstrap"
+import {
+  Card,
+  CardText,
+  CardTitle,
+  CardBody,
+  Form,
+  FormGroup,
+  Input,
+} from "reactstrap"
 import Img from "gatsby-image"
 import { graphql, StaticQuery, Link } from "gatsby"
 
-const Sidebar = () => (
+const Sidebar = ({ author, authorFluid }) => (
   <div>
+    {author && (
+      <Card>
+        <Img className="card-image-top" fluid={authorFluid} />
+        <CardBody>
+          <CardTitle className="text-center text-uppercase mb-3">
+            {author.name}
+          </CardTitle>
+          <CardText>{author.bio}</CardText>
+          <div className="author-social-links text-center">
+            <ul>
+              <li>
+                <a
+                  href={author.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="facebook"
+                >
+                  <i className="fab fa-facebook-f fa-lg"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={author.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="twitter"
+                >
+                  <i className="fab fa-twitter fa-lg"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={author.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="instagram"
+                >
+                  <i className="fab fa-instagram fa-lg"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={author.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="linkedin"
+                >
+                  <i className="fab fa-linkedin fa-lg"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={author.dev}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="dev"
+                >
+                  <i className="fab fa-dev fa-lg"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={author.medium}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="medium"
+                >
+                  <i className="fab fa-medium fa-lg"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </CardBody>
+      </Card>
+    )}
     <Card>
       <CardBody>
         <CardTitle className="text-center text-uppercase mb-3">
