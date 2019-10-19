@@ -14,11 +14,13 @@ const SinglePost = ({ data, pageContext }) => {
 
   const baseUrl = "https://mats.codes"
 
-  const disqusShortname = "https-mats-codes.disqus.com"
+  const disqusShortname = process.env.GATSBY_DISQUS_NAME
   const disqusConfig = {
+    shortname: disqusShortname,
     identifier: data.markdownRemark.id,
     url: baseUrl + pageContext.slug,
   }
+  console.log(disqusConfig)
 
   return (
     <Layout
@@ -41,7 +43,7 @@ const SinglePost = ({ data, pageContext }) => {
           <div className="post-tags">
             {post.tags.map(tag => (
               <li key={tag}>
-                <Link to={`tag/${slugify(tag)}`}>
+                <Link to={`/tag/${slugify(tag)}`}>
                   <Badge color="primary">{tag}</Badge>
                 </Link>
               </li>
@@ -104,7 +106,7 @@ const SinglePost = ({ data, pageContext }) => {
           </li>
         </ul>
       </div>
-      <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
+      <DiscussionEmbed {...disqusConfig} />
     </Layout>
   )
 }
