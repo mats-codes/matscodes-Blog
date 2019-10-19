@@ -7,6 +7,12 @@ import Img from "gatsby-image"
 import { slugify } from "../util/utilityFunctions"
 import authors from "../util/authors"
 import { DiscussionEmbed } from "disqus-react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faFacebookF,
+  faTwitter,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons"
 
 const SinglePost = ({ data, pageContext }) => {
   const post = data.markdownRemark.frontmatter
@@ -65,7 +71,7 @@ const SinglePost = ({ data, pageContext }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fab fa-facebook-f fa-2x" />
+              <FontAwesomeIcon icon={faFacebookF} size="2x" />
             </a>
           </li>
           <li>
@@ -83,7 +89,7 @@ const SinglePost = ({ data, pageContext }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fab fa-twitter fa-2x" />
+              <FontAwesomeIcon icon={faTwitter} size="2x" />
             </a>
           </li>
           <li>
@@ -101,7 +107,7 @@ const SinglePost = ({ data, pageContext }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i className="fab fa-linkedin fa-2x" />
+              <FontAwesomeIcon icon={faLinkedin} size="2x" />
             </a>
           </li>
         </ul>

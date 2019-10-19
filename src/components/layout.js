@@ -28,10 +28,6 @@ const Layout = ({ authorImageFluid, children, pageTitle, postAuthor }) => {
 
   return (
     <>
-      <script
-        src="https://kit.fontawesome.com/47f7ba1c83.js"
-        crossOrigin="anonymous"
-      ></script>
       <Header siteTitle={data.site.siteMetadata.title} />
       <div className="container" id="conent">
         <h1>{pageTitle}</h1>
