@@ -1,9 +1,15 @@
-.author-social-links {
-  ul {
-    display: inline-flex;
+.sidebar {
+  background: $elevated1;
+  padding: 15px;
+}
 
+.author-social-links {
+  text-align: center;
+  ul {
+    white-space: nowrap;
     li {
       margin: auto 7px;
+      display: inline-block;
 
       a {
         transition: all 0.1s ease-out;

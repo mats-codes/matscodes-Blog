@@ -2,13 +2,14 @@
   margin-top: 60px;
 }
 body {
-  background-color: $light-gray;
+  background-color: $background;
   font-family: $site-font;
+  color: $onBackground;
 }
 a {
-  color: #0056b3;
+  color: $primary;
   &:hover {
-    color: #007bff;
+    color: $primaryHover;
     text-decoration: none;
   }
 }
@@ -17,7 +18,7 @@ h1 {
   text-align: center;
 }
 .navbar {
-  background-color: white;
+  background-color: $elevated1;
   // border-right: 1px solid rgba(0, 0, 0, 0.4);
   // border-left: 1px solid rgba(0, 0, 0, 0.4);
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
@@ -25,9 +26,9 @@ h1 {
 }
 .navbar-light .navbar-nav .nav-link,
 .navbar-light .navbar-brand {
-  color: #0056b3;
+  color: $primary;
   &:hover {
-    color: #007bff;
+    color: $primaryHover;
   }
 }
 ul {

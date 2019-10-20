@@ -10,7 +10,7 @@ import {
   faMedium,
 } from "@fortawesome/free-brands-svg-icons"
 
-const SocialMediaIcons = () => (
+const SocialMediaIcons = props => (
   <div className="footer-social-links">
     <ul className="social-links-list">
       <li>
@@ -20,7 +20,7 @@ const SocialMediaIcons = () => (
           className="facebook"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faFacebookF} size="2x" />
+          <FontAwesomeIcon icon={faFacebookF} size={props.size} />
         </a>
       </li>
 
@@ -31,7 +31,7 @@ const SocialMediaIcons = () => (
           className="twitter"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faTwitter} size="2x" />
+          <FontAwesomeIcon icon={faTwitter} size={props.size} />
         </a>
       </li>
 
@@ -42,7 +42,7 @@ const SocialMediaIcons = () => (
           className="instagram"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faInstagram} size="2x" />
+          <FontAwesomeIcon icon={faInstagram} size={props.size} />
         </a>
       </li>
 
@@ -53,7 +53,7 @@ const SocialMediaIcons = () => (
           className="linkedin"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faLinkedin} size="2x" />
+          <FontAwesomeIcon icon={faLinkedin} size={props.size} />
         </a>
       </li>
 
@@ -64,7 +64,7 @@ const SocialMediaIcons = () => (
           className="github"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faGithub} size="2x" />
+          <FontAwesomeIcon icon={faGithub} size={props.size} />
         </a>
       </li>
 
@@ -75,7 +75,7 @@ const SocialMediaIcons = () => (
           className="dev"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faDev} size="2x" />
+          <FontAwesomeIcon icon={faDev} size={props.size} />
         </a>
       </li>
 
@@ -86,7 +86,7 @@ const SocialMediaIcons = () => (
           className="medium"
           rel="noopener noreferrer"
         >
-          <FontAwesomeIcon icon={faMedium} size="2x" />
+          <FontAwesomeIcon icon={faMedium} size={props.size} />
         </a>
       </li>
     </ul>

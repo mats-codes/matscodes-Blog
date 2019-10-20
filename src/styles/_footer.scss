@@ -1,5 +1,5 @@
 .site-footer {
-  background-color: $white;
+  background-color: $elevated1;
   margin-top: 20px;
   padding: 10px;
   text-align: center;
@@ -29,6 +29,15 @@
           }
           &.linkedin:hover {
             color: rgb(0, 119, 181);
+          }
+          &.github:hover {
+            color: #4078c0;
+          }
+          &.dev:hover {
+            color: #0a0a0a;
+          }
+          &.medium:hover {
+            color: #000000;
           }
         }
       }
