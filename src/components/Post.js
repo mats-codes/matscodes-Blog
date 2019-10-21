@@ -7,6 +7,7 @@ import {
   CardSubtitle,
   CardBody,
   Badge,
+  Button,
 } from "reactstrap"
 import Img from "gatsby-image"
 import { slugify } from "../util/utilityFunctions"
@@ -30,16 +31,14 @@ const Post = ({ title, author, slug, date, body, fluid, tags }) => {
           {tags.map(tag => (
             <li key={tag}>
               <Link to={`/tag/${slugify(tag)}`}>
-                <Badge className="text-uppercase" color="primary">
-                  {tag}
-                </Badge>
+                <Badge>{tag}</Badge>
               </Link>
             </li>
           ))}
         </ul>
-        <Link to={`/${slug}`} className="btn btn-outline-primary float-right">
+        <Button className="readMore" href={`/${slug}`}>
           Read More
-        </Link>
+        </Button>
       </CardBody>
     </Card>
   )

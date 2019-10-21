@@ -35,3 +35,34 @@ ul {
   list-style: none;
   padding: 0;
 }
+
+.pagination {
+  a {
+    background: $elevated1;
+    color: $primary;
+
+    &:hover {
+      background: $background;
+      color: $primary;
+    }
+
+    .page-item.active.page-link  {
+      background: $primary !important;
+    }
+  }
+
+  li.page-item.active {
+    a {
+      background: $primary;
+      color: $onPrimary;
+      border-color: $primary;
+    }
+  }
+
+  li.page-item.disabled {
+    a {
+      background: $elevated1;
+      color: $light-gray;
+    }
+  }
+}

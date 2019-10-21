@@ -34,3 +34,13 @@
     }
   }
 }
+
+.subscribeButton {
+  background: $secondary;
+  color: $onSecondary;
+
+  &:hover {
+    background: $secondaryHover;
+    color: $onSecondary;
+  }
+}

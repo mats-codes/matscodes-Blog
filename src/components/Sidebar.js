@@ -7,6 +7,7 @@ import {
   Form,
   FormGroup,
   Input,
+  Button,
 } from "reactstrap"
 import Img from "gatsby-image"
 import { graphql, StaticQuery, Link } from "gatsby"
@@ -53,9 +54,7 @@ const Sidebar = ({ author, authorFluid }) => {
                 placeholder="Your email address ..."
               />
             </FormGroup>
-            <button className="btn btn-outline-success text-uppercase">
-              Subscribe
-            </button>
+            <Button className="subscribeButton">Subscribe</Button>
           </Form>
         </CardBody>
       </Card>
