@@ -44,16 +44,17 @@ class Sidebar extends React.Component {
         if (res.result === "success") {
           this.setState({
             successMessage:
-              "Thanks for your support <3 We'll keep you up to date",
+              "Thanks for your support <3 We'll keep you up to date!",
           })
         } else {
           if (res.msg.includes("is already subscribed")) {
             this.setState({
-              successMessage: "Good news, you are already subscribed",
+              successMessage: "Good news, you are already subscribed!",
             })
           } else {
             this.setState({
-              successMessage: "Sorry, something went wrong :( Please try again",
+              successMessage:
+                "Sorry, something went wrong :( Please try again!",
             })
           }
         }
@@ -90,7 +91,7 @@ class Sidebar extends React.Component {
             <CardTitle className="text-center text-uppercase mb-3">
               Newsletter
             </CardTitle>
-            {successMessage === undefined ? (
+            {successMessage === undefined && errorMessage === undefined ? (
               <Form className="text-center" onSubmit={this.handleSubmit}>
                 <FormGroup>
                   <Input
@@ -102,6 +103,8 @@ class Sidebar extends React.Component {
                 </FormGroup>
                 <Button className="subscribeButton">Subscribe</Button>
               </Form>
+            ) : successMessage === undefined ? (
+              <p>{errorMessage}</p>
             ) : (
               <p>{successMessage}</p>
             )}

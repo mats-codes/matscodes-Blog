@@ -2,7 +2,7 @@ const authors = [
   {
     name: "Mattes Wieben",
     imageUrl: "me.jpg",
-    bio: "Mattes has been a developer for a long time.",
+    bio: "Señor Developer - Everything about JavaScript.",
     facebook: "https://www.facebook.com",
     twitter: "https://www.twitter.com",
     linkedin: "https://www.linkedin.com",
