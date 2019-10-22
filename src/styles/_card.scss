@@ -5,7 +5,7 @@
   .badge {
     background: $primary;
     color: $onPrimary;
-    padding: 10px;
+    padding: 15px;
     text-transform: uppercase;
 
     &:hover {
@@ -38,4 +38,12 @@
   li {
     margin-right: 10px;
   }
+}
+
+.elevatedCard {
+  background: $elevated2;
+}
+
+.elevated2Card {
+  background: $elevated3;
 }

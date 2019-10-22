@@ -44,3 +44,40 @@
     }
   }
 }
+
+ul.social-links-list {
+  text-align: center;
+  li {
+    margin-right: 15px;
+    display: inline-block;
+
+    a {
+      color: $primary;
+
+      &.instagram:hover {
+        color: #e95950;
+      }
+      &.facebook:hover {
+        color: rgb(66, 103, 178);
+      }
+      &.twitter:hover {
+        color: rgb(56, 161, 243);
+      }
+      &.google:hover {
+        color: rgb(221, 75, 57);
+      }
+      &.linkedin:hover {
+        color: rgb(0, 119, 181);
+      }
+      &.github:hover {
+        color: #4078c0;
+      }
+      &.dev:hover {
+        color: #0a0a0a;
+      }
+      &.medium:hover {
+        color: #000000;
+      }
+    }
+  }
+}

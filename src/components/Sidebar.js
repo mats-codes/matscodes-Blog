@@ -14,52 +14,101 @@ import { graphql, StaticQuery, Link } from "gatsby"
 import addToMailchimp from "gatsby-plugin-mailchimp"
 import SocialMediaIcons from "./SocialMediaIcons"
 
-const Sidebar = ({ author, authorFluid }) => {
-  const handleSubmit = e => {
-    console.log(e.target)
-    e.preventDefault()
-    console.log(process.env.MAILCHIMP_ENDPOINT)
+class Sidebar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      errorMessage: undefined,
+      successMessage: undefined,
+      mail: "",
+    }
+  }
 
-    addToMailchimp("test@me.de", {
-      PATHNAME: "test",
-      FNAME: "Ben",
-      LNAME: "CODE",
+  updateMail = mail => {
+    this.setState({
+      mail: mail.nativeEvent.srcElement.value,
     })
   }
 
-  return (
-    <div className="sidebar">
-      {author && (
-        <Card>
-          <Img className="card-image-top" fluid={authorFluid} />
+  handleSubmit = e => {
+    e.preventDefault()
+
+    // addToMailchimp(this.state.mail, {
+    //   PATHNAME: "test",
+    //   FNAME: "Ben",
+    //   LNAME: "CODE",
+    // })
+    addToMailchimp(this.state.mail)
+      .then(res => {
+        console.log(res)
+        if (res.result === "success") {
+          this.setState({
+            successMessage:
+              "Thanks for your support <3 We'll keep you up to date",
+          })
+        } else {
+          if (res.msg.includes("is already subscribed")) {
+            this.setState({
+              successMessage: "Good news, you are already subscribed",
+            })
+          } else {
+            this.setState({
+              successMessage: "Sorry, something went wrong :( Please try again",
+            })
+          }
+        }
+      })
+      .catch(err => {
+        console.error(err)
+        console.log("Gea")
+        this.setState({
+          errorMessage:
+            "Sorry, we could not reach our servers. Please try again.",
+        })
+      })
+  }
+
+  render() {
+    const { author, authorFluid } = this.props
+    const { errorMessage, successMessage } = this.state
+    return (
+      <div className="sidebar">
+        {author && (
+          <Card className="elevatedCard">
+            <Img className="card-image-top" fluid={authorFluid} />
+            <CardBody>
+              <CardTitle className="text-center text-uppercase mb-3">
+                {author.name}
+              </CardTitle>
+              <CardText>{author.bio}</CardText>
+              <SocialMediaIcons />
+            </CardBody>
+          </Card>
+        )}
+        <Card className="elevatedCard">
           <CardBody>
             <CardTitle className="text-center text-uppercase mb-3">
-              {author.name}
+              Newsletter
             </CardTitle>
-            <CardText>{author.bio}</CardText>
-            <SocialMediaIcons />
+            {successMessage === undefined ? (
+              <Form className="text-center" onSubmit={this.handleSubmit}>
+                <FormGroup>
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="Your email address ..."
+                    onChange={this.updateMail}
+                  />
+                </FormGroup>
+                <Button className="subscribeButton">Subscribe</Button>
+              </Form>
+            ) : (
+              <p>{successMessage}</p>
+            )}
           </CardBody>
         </Card>
-      )}
-      <Card>
-        <CardBody>
-          <CardTitle className="text-center text-uppercase mb-3">
-            Newsletter
-          </CardTitle>
-          <Form className="text-center" onSubmit={handleSubmit}>
-            <FormGroup>
-              <Input
-                type="email"
-                name="email"
-                placeholder="Your email address ..."
-              />
-            </FormGroup>
-            <Button className="subscribeButton">Subscribe</Button>
-          </Form>
-        </CardBody>
-      </Card>
 
-      {/* <Card>
+        {/* <Card>
       <CardBody>
         <CardTitle className="text-center text-uppercase">
           Advertisement
@@ -72,39 +121,40 @@ const Sidebar = ({ author, authorFluid }) => {
       </CardBody>
     </Card> */}
 
-      <Card>
-        <CardBody>
-          <CardTitle className="text-center text-uppercase mb-3">
-            Recent Posts
-          </CardTitle>
-          <StaticQuery
-            query={sidebarQuery}
-            render={data => (
-              <div>
-                {data.allMarkdownRemark.edges.map(({ node }) => (
-                  <Card key={node.id}>
-                    <Link to={`/${node.fields.slug}`}>
-                      <Img
-                        className="card-image-top"
-                        fluid={node.frontmatter.image.childImageSharp.fluid}
-                      />
-                    </Link>
-                    <CardBody>
-                      <CardTitle>
-                        <Link to={`/${node.fields.slug}`}>
-                          {node.frontmatter.title}
-                        </Link>
-                      </CardTitle>
-                    </CardBody>
-                  </Card>
-                ))}
-              </div>
-            )}
-          />
-        </CardBody>
-      </Card>
-    </div>
-  )
+        <Card className="elevatedCard">
+          <CardBody>
+            <CardTitle className="text-center text-uppercase mb-3">
+              Recent Posts
+            </CardTitle>
+            <StaticQuery
+              query={sidebarQuery}
+              render={data => (
+                <div>
+                  {data.allMarkdownRemark.edges.map(({ node }) => (
+                    <Card key={node.id} className="elevated2Card">
+                      <Link to={`/${node.fields.slug}`}>
+                        <Img
+                          className="card-image-top"
+                          fluid={node.frontmatter.image.childImageSharp.fluid}
+                        />
+                      </Link>
+                      <CardBody>
+                        <CardTitle>
+                          <Link to={`/${node.fields.slug}`}>
+                            {node.frontmatter.title}
+                          </Link>
+                        </CardTitle>
+                      </CardBody>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            />
+          </CardBody>
+        </Card>
+      </div>
+    )
+  }
 }
 
 const sidebarQuery = graphql`

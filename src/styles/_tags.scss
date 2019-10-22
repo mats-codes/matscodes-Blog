@@ -1,0 +1,15 @@
+.tagButton {
+  background: $primary;
+  color: $onPrimary;
+  text-transform: capitalize;
+
+  &:hover {
+    background: $primaryHover;
+    color: $onPrimary;
+  }
+
+  .badge {
+    background: $background;
+    color: $onBackground;
+  }
+}

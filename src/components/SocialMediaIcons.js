@@ -15,7 +15,7 @@ const SocialMediaIcons = props => (
     <ul className="social-links-list">
       <li>
         <a
-          href="https://www.facebook.com"
+          href="https://www.facebook.com/MatsCodes-113107510087221"
           target="_blank"
           className="facebook"
           rel="noopener noreferrer"
@@ -23,10 +23,9 @@ const SocialMediaIcons = props => (
           <FontAwesomeIcon icon={faFacebookF} size={props.size} />
         </a>
       </li>
-
       <li>
         <a
-          href="https://www.twitter.com"
+          href="https://www.twitter.com/MatsCodes"
           target="_blank"
           className="twitter"
           rel="noopener noreferrer"
@@ -34,10 +33,9 @@ const SocialMediaIcons = props => (
           <FontAwesomeIcon icon={faTwitter} size={props.size} />
         </a>
       </li>
-
       <li>
         <a
-          href="https://www.facebook.com"
+          href="https://www.instagram.com/mats.codes/"
           target="_blank"
           className="instagram"
           rel="noopener noreferrer"
@@ -48,7 +46,7 @@ const SocialMediaIcons = props => (
 
       <li>
         <a
-          href="https://www.facebook.com"
+          href="https://www.linkedin.com/in/mattes-wieben-424374192/"
           target="_blank"
           className="linkedin"
           rel="noopener noreferrer"
@@ -59,7 +57,7 @@ const SocialMediaIcons = props => (
 
       <li>
         <a
-          href="https://www.facebook.com"
+          href="https://www.github.com/mats-codes"
           target="_blank"
           className="github"
           rel="noopener noreferrer"
@@ -70,7 +68,7 @@ const SocialMediaIcons = props => (
 
       <li>
         <a
-          href="https://www.facebook.com"
+          href="https://dev.to/matscodes"
           target="_blank"
           className="dev"
           rel="noopener noreferrer"
@@ -81,7 +79,7 @@ const SocialMediaIcons = props => (
 
       <li>
         <a
-          href="https://www.facebook.com"
+          href="https://medium.com/@wieben.mattes"
           target="_blank"
           className="medium"
           rel="noopener noreferrer"

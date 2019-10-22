@@ -5,6 +5,10 @@ body {
   background-color: $background;
   font-family: $site-font;
   color: $onBackground;
+
+  h1 {
+    margin-top: 40px;
+  }
 }
 a {
   color: $primary;

@@ -13,9 +13,9 @@ const tagsPage = ({ pageContext }) => {
       <ul>
         {tags.map(tag => (
           <li key={tag} style={{ marginBottom: "10px" }}>
-            <Button color="primary" href={`/tag/${slugify(tag)}`}>
+            <Button className="tagButton" href={`/tag/${slugify(tag)}`}>
               {/* This syntax should ONLY be used when we need to access a property that is not known before runtime */}
-              {tag} <Badge color="light">{tagPostCounts[tag]}</Badge>
+              {tag} <Badge color="dark">{tagPostCounts[tag]}</Badge>
             </Button>
           </li>
         ))}

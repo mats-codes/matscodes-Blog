@@ -67,7 +67,7 @@ const SinglePost = ({ data, pageContext }) => {
                 baseUrl +
                 pageContext.slug
               }
-              className="Facebook"
+              className="facebook"
               target="_blank"
               rel="noopener noreferrer"
             >
