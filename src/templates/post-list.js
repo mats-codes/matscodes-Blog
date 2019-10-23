@@ -5,7 +5,7 @@ import { graphql } from "gatsby"
 import PaginationLinks from "../components/PaginationLinks"
 
 const postList = props => {
-  const posts = props.data.allMarkdownRemark.edges
+  const posts = props.data.allContentfulBlogPost.edges
   const { currentPage, numberOfPages } = props.pageContext
 
   return (
@@ -13,13 +13,13 @@ const postList = props => {
       {posts.map(({ node }) => (
         <Post
           key={node.id}
-          slug={node.fields.slug}
-          title={node.frontmatter.title}
-          author={node.frontmatter.author}
-          date={node.frontmatter.date}
+          slug={node.slug}
+          title={node.title}
+          author={node.author}
+          date={node.publishedDate}
           body={node.excerpt}
-          tags={node.frontmatter.tags}
-          fluid={node.frontmatter.image.childImageSharp.fluid}
+          tags={node.tags}
+          // fluid={node.frontmatter.image.childImageSharp.fluid}
         />
       ))}
       <PaginationLinks
@@ -31,34 +31,24 @@ const postList = props => {
 }
 
 export const postListQuery = graphql`
-  query postListQuery($skip: Int!, $limit: Int!) {
-    allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
+  query($skip: Int!, $limit: Int!) {
+    allContentfulBlogPost(
+      sort: { fields: [publishedDate], order: DESC }
       limit: $limit
       skip: $skip
     ) {
       edges {
         node {
           id
-          frontmatter {
-            title
-            date(formatString: "MMMM Do YYYY")
-            author
-            tags
-            image {
-              childImageSharp {
-                fluid(maxWidth: 650, maxHeight: 371) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-          fields {
-            slug
-          }
+          title
+          publishedDate(formatString: "MMMM Do YYYY")
+          author
+          tags
+          slug
           excerpt
         }
       }
+      totalCount
     }
   }
 `

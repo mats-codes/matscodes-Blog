@@ -17,20 +17,20 @@ const IndexPage = () => {
         query={indexQuery}
         render={data => {
           numberOfPages = Math.ceil(
-            data.allMarkdownRemark.totalCount / postsPerPage
+            data.allContentfulBlogPost.totalCount / postsPerPage
           )
           return (
             <div>
-              {data.allMarkdownRemark.edges.map(({ node }) => (
+              {data.allContentfulBlogPost.edges.map(({ node }) => (
                 <Post
                   key={node.id}
-                  title={node.frontmatter.title}
-                  author={node.frontmatter.author}
-                  slug={node.fields.slug}
-                  date={node.frontmatter.date}
+                  title={node.title}
+                  author={node.author}
+                  slug={node.slug}
+                  date={node.datePublished}
                   body={node.excerpt}
-                  fluid={node.frontmatter.image.childImageSharp.fluid}
-                  tags={node.frontmatter.tags}
+                  // fluid={node.frontmatter.image.childImageSharp.fluid}
+                  tags={node.tags}
                 />
               ))}
               <PaginationLinks currentPage={1} numberOfPages={numberOfPages} />
@@ -44,33 +44,21 @@ const IndexPage = () => {
 
 const indexQuery = graphql`
   query {
-    allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC }
+    allContentfulBlogPost(
+      sort: { fields: [publishedDate], order: DESC }
       limit: 2
     ) {
-      totalCount
       edges {
         node {
           id
-          frontmatter {
-            title
-            date(formatString: "MMM Do YYYY")
-            author
-            tags
-            image {
-              childImageSharp {
-                fluid(maxWidth: 600) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-          fields {
-            slug
-          }
-          excerpt
+          title
+          publishedDate(formatString: "MMMM Do YYYY")
+          author
+          tags
+          slug
         }
       }
+      totalCount
     }
   }
 `

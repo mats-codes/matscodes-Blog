@@ -29,16 +29,18 @@ const Layout = ({ authorImageFluid, children, pageTitle, postAuthor }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div className="container" id="conent">
-        <h1>{pageTitle}</h1>
-        <Row>
-          <Col md="8"> {children}</Col>
-          <Col md="4">
-            <Sidebar author={postAuthor} authorFluid={authorImageFluid} />
-          </Col>
-        </Row>
+      <div className="pagecontainer">
+        <div className="content">
+          <h1>{pageTitle}</h1>
+          <Row>
+            <Col md="8"> {children}</Col>
+            <Col md="4">
+              <Sidebar author={postAuthor} authorFluid={authorImageFluid} />
+            </Col>
+          </Row>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   )
 }

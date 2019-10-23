@@ -26,18 +26,30 @@ exports.createPages = ({ actions, graphql }) => {
     authorList: path.resolve("src/templates/author-posts.js"),
   }
 
+  // {
+  //   allMarkdownRemark {
+  //     edges {
+  //       node {
+  //         frontmatter {
+  //           author
+  //           tags
+  //         }
+  //         fields {
+  //           slug
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
   return graphql(`
-    {
-      allMarkdownRemark {
+    query {
+      allContentfulBlogPost {
         edges {
           node {
-            frontmatter {
-              author
-              tags
-            }
-            fields {
-              slug
-            }
+            slug
+            tags
+            author
           }
         }
       }
@@ -45,20 +57,19 @@ exports.createPages = ({ actions, graphql }) => {
   `).then(res => {
     if (res.errors) return Promise.reject(res.errors)
 
-    const posts = res.data.allMarkdownRemark.edges
+    const posts = res.data.allContentfulBlogPost.edges
 
     // Create single blog post pages
     posts.forEach(({ node }) => {
       createPage({
-        path: node.fields.slug,
+        path: node.slug,
         component: templates.singlePost,
         context: {
           // Passing slug for template to use to get post
-          slug: node.fields.slug,
+          slug: node.slug,
 
           // Find author imageUrl from authors and pass it to the single post template
-          imageUrl: authors.find(x => x.name === node.frontmatter.author)
-            .imageUrl,
+          imageUrl: authors.find(x => x.name === node.author).imageUrl,
         },
       })
     })
@@ -66,8 +77,8 @@ exports.createPages = ({ actions, graphql }) => {
     // Get all tags
     let tags = []
     _.each(posts, edge => {
-      if (_.get(edge, "node.frontmatter.tags")) {
-        tags = tags.concat(edge.node.frontmatter.tags)
+      if (_.get(edge, "node.tags")) {
+        tags = tags.concat(edge.node.tags)
       }
     })
 

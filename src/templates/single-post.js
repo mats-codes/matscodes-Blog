@@ -13,9 +13,10 @@ import {
   faTwitter,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
 const SinglePost = ({ data, pageContext }) => {
-  const post = data.markdownRemark.frontmatter
+  const post = data.contentfulBlogPost
   const author = authors.find(x => x.name === post.author)
 
   const baseUrl = "https://mats.codes"
@@ -23,29 +24,29 @@ const SinglePost = ({ data, pageContext }) => {
   const disqusShortname = process.env.GATSBY_DISQUS_NAME
   const disqusConfig = {
     shortname: disqusShortname,
-    identifier: data.markdownRemark.id,
+    identifier: data.id,
     url: baseUrl + pageContext.slug,
   }
-  console.log(disqusConfig)
 
   return (
     <Layout
       pageTitle={post.title}
       postAuthor={author}
-      authorImageFluid={data.file.childImageSharp.fluid}
+      // authorImageFluid={data.file.childImageSharp.fluid}
     >
       <SEO title={post.title} />
       <Card>
-        <Img
+        {/* <Img
           className="card-image-top"
           fluid={post.image.childImageSharp.fluid}
-        />
+        /> */}
         <CardBody>
           <CardSubtitle>
-            <span className="text-info">{post.date}</span> by{" "}
+            <span className="text-info">{post.publishedDate}</span> by{" "}
             <span className="text-info">{post.author}</span>
           </CardSubtitle>
-          <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
+          {documentToReactComponents(post.body.json)}
+          {/* <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} /> */}
           <div className="post-tags">
             {post.tags.map(tag => (
               <li key={tag}>
@@ -117,30 +118,42 @@ const SinglePost = ({ data, pageContext }) => {
   )
 }
 
+// query blogPostBySlug($slug: String!, $imageUrl: String!) {
+//   markdownRemark(fields: { slug: { eq: $slug } }) {
+//     id
+//     html
+//     frontmatter {
+//       title
+//       author
+//       date(formatString: "MMM Do YYYY")
+//       tags
+//       image {
+//         childImageSharp {
+//           fluid(maxWidth: 700) {
+//             ...GatsbyImageSharpFluid
+//           }
+//         }
+//       }
+//     }
+//   }
+//   file(relativePath: { eq: $imageUrl }) {
+//     childImageSharp {
+//       fluid(maxWidth: 300) {
+//         ...GatsbyImageSharpFluid
+//       }
+//     }
+//   }
+// }
 export const postQuery = graphql`
-  query blogPostBySlug($slug: String!, $imageUrl: String!) {
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+  query {
+    contentfulBlogPost(slug: { eq: "hello-world" }) {
       id
-      html
-      frontmatter {
-        title
-        author
-        date(formatString: "MMM Do YYYY")
-        tags
-        image {
-          childImageSharp {
-            fluid(maxWidth: 700) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-    }
-    file(relativePath: { eq: $imageUrl }) {
-      childImageSharp {
-        fluid(maxWidth: 300) {
-          ...GatsbyImageSharpFluid
-        }
+      title
+      author
+      publishedDate(formatString: "MMM Do YYYY")
+      tags
+      body {
+        json
       }
     }
   }

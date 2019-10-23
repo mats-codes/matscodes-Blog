@@ -45,16 +45,17 @@ class Sidebar extends React.Component {
           this.setState({
             successMessage:
               "Thanks for your support <3 We'll keep you up to date!",
+            errorMessage: undefined,
           })
         } else {
           if (res.msg.includes("is already subscribed")) {
             this.setState({
               successMessage: "Good news, you are already subscribed!",
+              errorMessage: undefined,
             })
           } else {
             this.setState({
-              successMessage:
-                "Sorry, something went wrong :( Please try again!",
+              errorMessage: "Sorry, something went wrong :( Please try again!",
             })
           }
         }
@@ -75,8 +76,8 @@ class Sidebar extends React.Component {
     return (
       <div className="sidebar">
         {author && (
-          <Card className="elevatedCard">
-            <Img className="card-image-top" fluid={authorFluid} />
+          <Card>
+            {/* <Img className="card-image-top" fluid={authorFluid} /> */}
             <CardBody>
               <CardTitle className="text-center text-uppercase mb-3">
                 {author.name}
@@ -86,12 +87,12 @@ class Sidebar extends React.Component {
             </CardBody>
           </Card>
         )}
-        <Card className="elevatedCard">
+        <Card>
           <CardBody>
             <CardTitle className="text-center text-uppercase mb-3">
               Newsletter
             </CardTitle>
-            {successMessage === undefined && errorMessage === undefined ? (
+            {successMessage === undefined ? (
               <Form className="text-center" onSubmit={this.handleSubmit}>
                 <FormGroup>
                   <Input
@@ -103,28 +104,14 @@ class Sidebar extends React.Component {
                 </FormGroup>
                 <Button className="subscribeButton">Subscribe</Button>
               </Form>
-            ) : successMessage === undefined ? (
-              <p>{errorMessage}</p>
             ) : (
               <p>{successMessage}</p>
             )}
+            {errorMessage !== undefined && <p>{errorMessage}</p>}
           </CardBody>
         </Card>
 
-        {/* <Card>
-      <CardBody>
-        <CardTitle className="text-center text-uppercase">
-          Advertisement
-        </CardTitle>
-        <img
-          src="https://via.placeholder.com/320x200"
-          alt="Advert"
-          style={{ width: "100%" }}
-        />
-      </CardBody>
-    </Card> */}
-
-        <Card className="elevatedCard">
+        <Card>
           <CardBody>
             <CardTitle className="text-center text-uppercase mb-3">
               Recent Posts
@@ -133,19 +120,17 @@ class Sidebar extends React.Component {
               query={sidebarQuery}
               render={data => (
                 <div>
-                  {data.allMarkdownRemark.edges.map(({ node }) => (
-                    <Card key={node.id} className="elevated2Card">
-                      <Link to={`/${node.fields.slug}`}>
-                        <Img
+                  {data.allContentfulBlogPost.edges.map(({ node }) => (
+                    <Card key={node.id} className="elevatedCard">
+                      <Link to={`/${node.slug}`}>
+                        {/* <Img
                           className="card-image-top"
-                          fluid={node.frontmatter.image.childImageSharp.fluid}
-                        />
+                          // fluid={node.frontmatter.image.childImageSharp.fluid}
+                        /> */}
                       </Link>
                       <CardBody>
                         <CardTitle>
-                          <Link to={`/${node.fields.slug}`}>
-                            {node.frontmatter.title}
-                          </Link>
+                          <Link to={`/${node.slug}`}>{node.title}</Link>
                         </CardTitle>
                       </CardBody>
                     </Card>
@@ -161,24 +146,13 @@ class Sidebar extends React.Component {
 }
 
 const sidebarQuery = graphql`
-  query sidebarQuery {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+  query {
+    allContentfulBlogPost {
       edges {
         node {
           id
-          frontmatter {
-            title
-            image {
-              childImageSharp {
-                fluid(maxWidth: 300) {
-                  ...GatsbyImageSharpFluid
-                }
-              }
-            }
-          }
-          fields {
-            slug
-          }
+          title
+          slug
         }
       }
     }

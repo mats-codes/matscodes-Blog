@@ -1,6 +1,5 @@
 .sidebar {
-  background: $elevated1;
-  padding: 15px;
+  padding: 0 15px;
 }
 
 .author-social-links {
@@ -38,6 +37,7 @@
 .subscribeButton {
   background: $secondary;
   color: $onSecondary;
+  margin-bottom: 10px;
 
   &:hover {
     background: $secondaryHover;

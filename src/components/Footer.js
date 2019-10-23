@@ -6,7 +6,8 @@ import { Link } from "gatsby"
 const Footer = () => (
   <div className="site-footer">
     <Row>
-      <Col md="10">
+      <Col md="2">© 2019 - Mattes Wieben</Col>
+      <Col md="8">
         <h4 className="text-center">Mats.codes</h4>
         <p className="text-center">Follow me on social media</p>
         <SocialMediaIcons size="2x" />
