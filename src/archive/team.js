@@ -1,7 +1,7 @@
 import React from "react"
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "../components/Layout"
+import SEO from "../components/Seo"
 
 import authors from "../util/authors"
 import { Row, Card, CardText, CardBody, CardTitle, Button } from "reactstrap"
