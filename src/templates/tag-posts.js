@@ -21,7 +21,7 @@ const tagPosts = ({ data, pageContext }) => {
           date={node.publishedDate}
           body={node.excerpt}
           tags={node.tags}
-          // fluid={node.frontmatter.image.childImageSharp.fluid}
+          fluid={node.mainImage.fluid}
         />
       ))}
     </Layout>
@@ -43,6 +43,11 @@ export const tagQuery = graphql`
           tags
           slug
           excerpt
+          mainImage {
+            fluid(maxWidth: 600) {
+              ...GatsbyContentfulFluid
+            }
+          }
         }
       }
       totalCount

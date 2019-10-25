@@ -24,29 +24,35 @@ const SinglePost = ({ data, pageContext }) => {
   const disqusShortname = process.env.GATSBY_DISQUS_NAME
   const disqusConfig = {
     shortname: disqusShortname,
-    identifier: data.id,
+    identifier: post.id,
     url: baseUrl + pageContext.slug,
+  }
+
+  const options = {
+    renderNode: {
+      "embedded-asset-block": node => {
+        const alt = node.data.target.fields.title["en-US"]
+        const url = node.data.target.fields.file["en-US"].url
+        return <Img alt={alt} src={url} />
+      },
+    },
   }
 
   return (
     <Layout
       pageTitle={post.title}
       postAuthor={author}
-      // authorImageFluid={data.file.childImageSharp.fluid}
+      authorImageFluid={data.file.childImageSharp.fluid}
     >
       <SEO title={post.title} />
       <Card>
-        {/* <Img
-          className="card-image-top"
-          fluid={post.image.childImageSharp.fluid}
-        /> */}
+        <Img className="card-image-top" fluid={post.mainImage.fluid} />
         <CardBody>
           <CardSubtitle>
             <span className="text-info">{post.publishedDate}</span> by{" "}
             <span className="text-info">{post.author}</span>
           </CardSubtitle>
-          {documentToReactComponents(post.body.json)}
-          {/* <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} /> */}
+          {documentToReactComponents(post.body.json, options)}
           <div className="post-tags">
             {post.tags.map(tag => (
               <li key={tag}>
@@ -118,35 +124,9 @@ const SinglePost = ({ data, pageContext }) => {
   )
 }
 
-// query blogPostBySlug($slug: String!, $imageUrl: String!) {
-//   markdownRemark(fields: { slug: { eq: $slug } }) {
-//     id
-//     html
-//     frontmatter {
-//       title
-//       author
-//       date(formatString: "MMM Do YYYY")
-//       tags
-//       image {
-//         childImageSharp {
-//           fluid(maxWidth: 700) {
-//             ...GatsbyImageSharpFluid
-//           }
-//         }
-//       }
-//     }
-//   }
-//   file(relativePath: { eq: $imageUrl }) {
-//     childImageSharp {
-//       fluid(maxWidth: 300) {
-//         ...GatsbyImageSharpFluid
-//       }
-//     }
-//   }
-// }
 export const postQuery = graphql`
-  query {
-    contentfulBlogPost(slug: { eq: "hello-world" }) {
+  query($slug: String!, $imageUrl: String!) {
+    contentfulBlogPost(slug: { eq: $slug }) {
       id
       title
       author
@@ -154,6 +134,18 @@ export const postQuery = graphql`
       tags
       body {
         json
+      }
+      mainImage {
+        fluid(maxWidth: 700) {
+          ...GatsbyContentfulFluid
+        }
+      }
+    }
+    file(relativePath: { eq: $imageUrl }) {
+      childImageSharp {
+        fluid(maxWidth: 300) {
+          ...GatsbyImageSharpFluid
+        }
       }
     }
   }

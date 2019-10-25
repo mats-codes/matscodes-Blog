@@ -16,7 +16,7 @@ const Post = ({ title, author, slug, date, body, fluid, tags }) => {
   return (
     <Card>
       <Link to={`/${slug}`}>
-        {/* <Img className="card-image-top" fluid={fluid} /> */}
+        <Img className="card-image-top" fluid={fluid} />
       </Link>
       <CardBody>
         <CardTitle>

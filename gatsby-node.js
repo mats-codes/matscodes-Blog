@@ -3,18 +3,6 @@ const path = require("path")
 const authors = require("./src/util/authors")
 const _ = require("lodash")
 
-exports.onCreateNode = ({ node, actions }) => {
-  const { createNodeField } = actions
-  if (node.internal.type === "MarkdownRemark") {
-    const slugFromTitle = slugify(node.frontmatter.title)
-    createNodeField({
-      node,
-      name: "slug",
-      value: slugFromTitle,
-    })
-  }
-}
-
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions
 
@@ -25,22 +13,6 @@ exports.createPages = ({ actions, graphql }) => {
     postList: path.resolve("src/templates/post-list.js"),
     authorList: path.resolve("src/templates/author-posts.js"),
   }
-
-  // {
-  //   allMarkdownRemark {
-  //     edges {
-  //       node {
-  //         frontmatter {
-  //           author
-  //           tags
-  //         }
-  //         fields {
-  //           slug
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 
   return graphql(`
     query {
@@ -61,6 +33,7 @@ exports.createPages = ({ actions, graphql }) => {
 
     // Create single blog post pages
     posts.forEach(({ node }) => {
+      if (node.isTemplate) return
       createPage({
         path: node.slug,
         component: templates.singlePost,
@@ -110,7 +83,7 @@ exports.createPages = ({ actions, graphql }) => {
       })
     })
 
-    const postsPerPage = 2
+    const postsPerPage = 5
     const numberOfPages = Math.ceil(posts.length / postsPerPage)
 
     Array.from({ length: numberOfPages }).forEach((_, index) => {

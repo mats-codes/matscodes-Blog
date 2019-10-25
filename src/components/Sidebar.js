@@ -40,7 +40,6 @@ class Sidebar extends React.Component {
     // })
     addToMailchimp(this.state.mail)
       .then(res => {
-        console.log(res)
         if (res.result === "success") {
           this.setState({
             successMessage:
@@ -62,7 +61,6 @@ class Sidebar extends React.Component {
       })
       .catch(err => {
         console.error(err)
-        console.log("Gea")
         this.setState({
           errorMessage:
             "Sorry, we could not reach our servers. Please try again.",
@@ -77,7 +75,7 @@ class Sidebar extends React.Component {
       <div className="sidebar">
         {author && (
           <Card>
-            {/* <Img className="card-image-top" fluid={authorFluid} /> */}
+            <Img className="card-image-top" fluid={authorFluid} />
             <CardBody>
               <CardTitle className="text-center text-uppercase mb-3">
                 {author.name}
@@ -123,10 +121,10 @@ class Sidebar extends React.Component {
                   {data.allContentfulBlogPost.edges.map(({ node }) => (
                     <Card key={node.id} className="elevatedCard">
                       <Link to={`/${node.slug}`}>
-                        {/* <Img
+                        <Img
                           className="card-image-top"
-                          // fluid={node.frontmatter.image.childImageSharp.fluid}
-                        /> */}
+                          fluid={node.mainImage.fluid}
+                        />
                       </Link>
                       <CardBody>
                         <CardTitle>
@@ -153,6 +151,11 @@ const sidebarQuery = graphql`
           id
           title
           slug
+          mainImage {
+            fluid(maxWidth: 600) {
+              ...GatsbyContentfulFluid
+            }
+          }
         }
       }
     }

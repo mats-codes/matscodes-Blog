@@ -29,7 +29,7 @@ const IndexPage = () => {
                   slug={node.slug}
                   date={node.datePublished}
                   body={node.excerpt}
-                  // fluid={node.frontmatter.image.childImageSharp.fluid}
+                  fluid={node.mainImage.fluid}
                   tags={node.tags}
                 />
               ))}
@@ -56,6 +56,11 @@ const indexQuery = graphql`
           author
           tags
           slug
+          mainImage {
+            fluid(maxWidth: 600) {
+              ...GatsbyContentfulFluid
+            }
+          }
         }
       }
       totalCount
