@@ -33,7 +33,9 @@ const SinglePost = ({ data, pageContext }) => {
       "embedded-asset-block": node => {
         const alt = node.data.target.fields.title["en-US"]
         const url = node.data.target.fields.file["en-US"].url
-        return <Img alt={alt} src={url} />
+        console.log(alt)
+        console.log(url)
+        return <img alt={alt} src={url} class="centerImage" />
       },
     },
   }
@@ -52,7 +54,9 @@ const SinglePost = ({ data, pageContext }) => {
             <span className="text-info">{post.publishedDate}</span> by{" "}
             <span className="text-info">{post.author}</span>
           </CardSubtitle>
-          {documentToReactComponents(post.body.json, options)}
+          <div className="blog-post">
+            {documentToReactComponents(post.body.json, options)}
+          </div>
           <div className="post-tags">
             {post.tags.map(tag => (
               <li key={tag}>

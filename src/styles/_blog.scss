@@ -1,0 +1,23 @@
+.blog-post {
+  font-weight: 200;
+
+  .centerImage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+  ul {
+    list-style: circle;
+    padding: 10px 40px;
+  }
+
+  img {
+    padding: 0 0 40px 0;
+  }
+
+  b {
+    font-weight: 900;
+  }
+}

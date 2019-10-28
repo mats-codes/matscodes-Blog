@@ -46,7 +46,7 @@ const indexQuery = graphql`
   query {
     allContentfulBlogPost(
       sort: { fields: [publishedDate], order: DESC }
-      limit: 2
+      limit: 5
     ) {
       edges {
         node {
@@ -56,6 +56,7 @@ const indexQuery = graphql`
           author
           tags
           slug
+          excerpt
           mainImage {
             fluid(maxWidth: 600) {
               ...GatsbyContentfulFluid
