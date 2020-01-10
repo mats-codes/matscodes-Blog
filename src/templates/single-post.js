@@ -33,7 +33,7 @@ const SinglePost = ({ data, pageContext }) => {
       "embedded-asset-block": node => {
         const alt = node.data.target.fields.title["en-US"]
         const url = node.data.target.fields.file["en-US"].url
-        return <img alt={alt} src={url} class="centerImage" />
+        return <img alt={alt} src={url} className="centerImage" />
       },
     },
   }
